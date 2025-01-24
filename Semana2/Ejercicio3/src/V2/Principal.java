@@ -16,7 +16,7 @@ public class Principal {
 	
 	public static void main (String [] args) {
 		
-		System.out.println("Veterinaria");
+		System.out.println("Veterinaria. Version para no repetir el objeto creado (tipo de animal)");
 		Registro[] rgstr = { new Perro("Morty", 6),
 						new Perro("Kirino", 11),
 						/*new Gato("Mandarino", 1),
