@@ -1,1 +1,5 @@
-yrtyt66ytrgrtrtgrtgrtgtr
+Todos los metodos de una Interface son public y abstract
+
+Preguntas del examen: investigar 5 antipatrones
+
+docker run -d --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password -p 27017:27017 mongo
