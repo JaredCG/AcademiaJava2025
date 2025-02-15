@@ -10,4 +10,6 @@ public interface MedicinaService {
 	List<Medicina> getMedicinas(String Medname);
 	
 	void delete(String id);	
+	
+	List<Medicina> buscarRangoPrecios (double minP, double maxP);
 }
