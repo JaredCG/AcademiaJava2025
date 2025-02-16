@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CalculadoraTest {
+	
 	Calculadora calculadora;
 	
 	@BeforeEach
@@ -18,5 +19,11 @@ public class CalculadoraTest {
 	@DisplayName("Prueba 1: Suma")
 	public void pruebaSuma() {
 		 assertEquals(6, calculadora.suma(1,5));
+	}
+	
+	@Test
+	@DisplayName("Prueba 2: Multiplicacion en la nube")
+	public void pruebaMulti() {
+		assertEquals(12, calculadora.multiNube(3, 4));
 	}
 }
