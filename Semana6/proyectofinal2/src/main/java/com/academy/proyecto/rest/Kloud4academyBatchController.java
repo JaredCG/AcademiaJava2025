@@ -66,7 +66,8 @@ public class Kloud4academyBatchController {
                 productInfoList.add(productData);
             }
 
-            BulkOperations bulkOps = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, ProductBean.class);
+            BulkOperations bulkOps = 
+            		mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, ProductBean.class);
             productInfoList.stream().filter(product -> product != null).forEach(product -> {
                 org.bson.Document dbDoc = new org.bson.Document().append("$set", product);
                 mongoTemplate.getConverter().write(product, dbDoc);

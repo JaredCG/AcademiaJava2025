@@ -37,6 +37,7 @@ public class Kloud4academyBatchConfiguration {
         return new FlatFileItemReaderBuilder<>()
             .name("coffeeItemReader")
             .resource(new ClassPathResource(fileInput))
+            .linesToSkip(1)
             .delimited()
             .names(new String[] { "productId", "productName", "productDesc", "price" })
             .fieldSetMapper(new BeanWrapperFieldSetMapper() {{
