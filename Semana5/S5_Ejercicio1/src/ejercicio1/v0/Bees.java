@@ -14,7 +14,8 @@ public class Bees {
 	        Thread t1 = new Thread();
 	        t1.start();
 	        System.out.print("1 ");
-	        t1.wait(5000);//Investigar "wait"
+	        t1.wait();//"Pausado" hasta que el hilo sea invocado de nuevo (notify)
+	        t1.notify();
 	        //Thread.sleep(5000);
 	        System.out.print("2 ");
 	    }
