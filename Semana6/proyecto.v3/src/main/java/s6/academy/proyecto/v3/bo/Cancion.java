@@ -18,5 +18,5 @@ public class Cancion {
 	private String artista;
 	private String album;
 	private String genero;
-	private double duracion;
+	private String duracion;
 }

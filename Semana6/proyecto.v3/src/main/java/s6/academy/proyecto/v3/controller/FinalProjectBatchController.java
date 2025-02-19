@@ -66,11 +66,10 @@ public class FinalProjectBatchController {
                 productData.setArtista(productStringArry[2]);
                 productData.setAlbum(productStringArry[3]);
                 productData.setGenero(productStringArry[4]);
-//                String[] duracionArray = { productData.getDuracion(
-//                };
-//                productData.setDuracion(productStringArry[5]);
+                productData.setDuracion(productStringArry[5]);
+                //productData.setDuracion(Double.parseDouble(productStringArry[5]));
                 productInfoList.add(productData);
-            }//Intentanto meter la duracion de las canciones en tipo double
+            }//Intento declarando "duracion" como string
 
             BulkOperations bulkOps = 
             		mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Cancion.class);
