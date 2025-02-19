@@ -1,5 +1,30 @@
+1: La función main siempre tiene que ser publica (public), estática (static) y no retornar nada (void)
+2: Del capitulo 3 no ver pattern matching ni switch statement o expressions
+
+case 1,2: solo a partir de java 14 
+
+En las clases hay instancias, constructores y métodos
+
+Un método de instancia si puede tener acceso a atributos de instancia estáticos
+
+Todas las clases heredan de (tienen de papá) Object implícitamente, si no se especifica
+
+Un constructor no debe llevar valor de retorno (void)
+
+Capitulo 5 del libro: no ver "records"
+
+Capitulo 6: no ver "records" y "pattern matching"
+
+NO hay setters (setX) en las clases y objetos inmutables
+
+No se puede usar this para llamar un objeto en un método static
+
 Todos los metodos de una Interface son public y abstract
 
 Preguntas del examen: investigar 5 antipatrones
 
 docker run -d --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password -p 27017:27017 mongo
+
+Las interfaces no heredan de Object
+
+Los generics solo existen en tiempo de compilacion

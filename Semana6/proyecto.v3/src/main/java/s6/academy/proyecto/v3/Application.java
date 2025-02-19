@@ -1,4 +1,4 @@
-package s6.academy.proyecto.v2;
+package s6.academy.proyecto.v3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
