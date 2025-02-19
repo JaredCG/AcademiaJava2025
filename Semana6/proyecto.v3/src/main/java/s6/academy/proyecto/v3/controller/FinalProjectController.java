@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class FinalProjectBatchController {
+public class FinalProjectController {
 
     @Value("${file.input}")
     private String fileInput;
