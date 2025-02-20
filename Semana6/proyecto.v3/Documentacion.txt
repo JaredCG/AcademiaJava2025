@@ -1,0 +1,14 @@
+Iniciada la app, cargar el link para subir los datos guardados en songs.csv a mongodb	
+
+	#localhost:8084/musica/mongodbbulkupdate
+
+Para mostrar todos los datos (canciones), poner el siguiente link para llamar al GetMapping
+
+	#localhost:8084/musica/canciones
+
+Ya fue declarado el GET para mostrar la cancion que se busque pero no he podido habilitar Swagger
+
+
+
+
+MusicProcessor.java es para Spring Batch, no se va a usar

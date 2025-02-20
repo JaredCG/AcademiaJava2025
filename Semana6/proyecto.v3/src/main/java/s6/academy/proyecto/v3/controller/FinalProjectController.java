@@ -7,6 +7,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import s6.academy.proyecto.v3.bo.Cancion;
+import s6.academy.proyecto.v3.service.CancionService;
+import s6.academy.proyecto.v3.service.PlaylistService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +17,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
@@ -24,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/musica")
 public class FinalProjectController {
 
     @Value("${file.input}")
@@ -31,6 +38,12 @@ public class FinalProjectController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+    
+    @Autowired
+    private CancionService cancionService;
+    
+    @Autowired
+    private PlaylistService playlistService;
 
     @GetMapping("/mongodbbulkupdate")
     public String directHomePage() {
@@ -87,4 +100,24 @@ public class FinalProjectController {
             e.printStackTrace();
         }
     }
+    
+    @GetMapping("/canciones")
+	public List<Cancion> getCanciones(){
+		return cancionService.getCanciones();
+	}
+    
+    @GetMapping
+	public List<Cancion> getCancion(@RequestParam String name){
+		return cancionService.getCancion(name);
+	}
+	
+//	@DeleteMapping("/{id}")
+//	public void delete (@PathVariable String songId) {
+//		cancionService.delete(songId);
+//	}
+	
+//	@GetMapping("/rangoprecios")
+//	public List<Cancion> getRangoDuracion(@RequestParam double min, double max){
+//		return cancionService.getRangoDuracion(min,max);
+//	}
 }
