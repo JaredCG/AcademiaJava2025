@@ -12,3 +12,10 @@ Ya fue declarado el GET para mostrar la cancion que se busque pero no he podido 
 
 
 MusicProcessor.java es para Spring Batch, no se va a usar
+
+Estoy usando Spring Boot 3.3.8, Spring Boot 3 no soporta Swagger 2, cambiar a OpenAPI 3
+
+#http://localhost:8080/v3/api-docs o en 8084, ya probaré
+#springdoc.api-docs.path=/ruta para personalizar la ruta
+#http://localhost:8080/swagger-ui/index.html para ver la documentacion de swagger ui
+#springdoc.swagger-ui.path=/swagger-ui-custom.html para personalizar la ruta
