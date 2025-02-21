@@ -28,15 +28,15 @@ public class CancionServiceImpl implements CancionService {
 		return cancionRepo.findByTitulo(songName);
 	}
 
-//	@Override
-//	public void delete(String songId) {
-//		cancionRepo.deleteById(songId);
-//	}
-//	
-//	@Override
-//	public List<Cancion> getRangoDuracion(double minD, double maxD) {
-//		Query query = new Query();
-//		query.addCriteria(Criteria.where("duracion").gte(minD).lte(maxD));
-//		return mongoTemplate.find(query,Cancion.class);
-//	}
+	@Override
+	public void delete(String songId) {
+		cancionRepo.deleteById(songId);
+	}
+	
+	@Override
+	public List<Cancion> getRangoDuracion(double minD, double maxD) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("duracion").gte(minD).lte(maxD));
+		return mongoTemplate.find(query,Cancion.class);
+	}
 }

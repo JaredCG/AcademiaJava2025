@@ -10,9 +10,9 @@ public interface CancionService {
 	//Impresion de las canciones y eliminacion de una cancion
 	List<Cancion> getCanciones();
 	List<Cancion> getCancion(String songName);
-//	void delete(String songId);
+	void delete(String songId);
 //	
-//	//Agregar cancion en playlist, imprimir canciones de una playlist y eliminar cancion de una playlist
-//	List<Cancion> getRangoDuracion (double minD, double maxD);
+	//Imprimir canciones en un rango dado
+	List<Cancion> getRangoDuracion (double minD, double maxD);
 	//List<Cancion> getSongsPL(String plName);
 }

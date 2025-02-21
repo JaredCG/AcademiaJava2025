@@ -111,13 +111,13 @@ public class FinalProjectController {
 		return cancionService.getCancion(name);
 	}
 	
-//	@DeleteMapping("/{id}")
-//	public void delete (@PathVariable String songId) {
-//		cancionService.delete(songId);
-//	}
+	@DeleteMapping("/{id}")
+	public void delete (@PathVariable String songId) {
+		cancionService.delete(songId);
+	}
 	
-//	@GetMapping("/rangoprecios")
-//	public List<Cancion> getRangoDuracion(@RequestParam double min, double max){
-//		return cancionService.getRangoDuracion(min,max);
-//	}
+	@GetMapping("/rangoduracion")
+	public List<Cancion> getRangoDuracion(@RequestParam double min, double max){
+		return cancionService.getRangoDuracion(min,max);
+	}
 }
