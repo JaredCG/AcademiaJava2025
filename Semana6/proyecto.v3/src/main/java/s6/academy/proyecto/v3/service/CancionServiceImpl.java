@@ -65,7 +65,7 @@ public class CancionServiceImpl implements CancionService {
         if (cancionBody.getArtista() != null && !cancionBody.getArtista().isEmpty()) {
         	modifCancion.setArtista(cancionBody.getArtista());
         }
-        if (cancionBody.getAlbum() != null) {  // Asegurar que la duración se puede modificar
+        if (cancionBody.getAlbum() != null) { 
         	modifCancion.setDuracion(cancionBody.getAlbum());
         }
 

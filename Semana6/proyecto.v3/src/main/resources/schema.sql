@@ -1,8 +1,10 @@
-DROP TABLE product IF EXISTS;
+DROP TABLE fonoteca IF EXISTS;
 
-CREATE TABLE product (
-    productId VARCHAR(20) NOT NULL,
-    productName VARCHAR(20),
-    productDesc VARCHAR(60),
-    price VARCHAR(30)
+CREATE TABLE fonoteca (
+    songId VARCHAR(20) NOT NULL,
+    titulo VARCHAR(20),
+    artista VARCHAR(60),
+    album VARCHAR(30),
+    genero VARCHAR(30),
+    duracion VARCHAR(20)
 );
