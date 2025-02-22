@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import s6.academy.proyecto.v3.bo.Cancion;
 import s6.academy.proyecto.v3.bo.Playlist;
+import s6.academy.proyecto.v3.repository.CancionRepo;
 import s6.academy.proyecto.v3.repository.PlaylistRepo;
 
 @Service
@@ -20,12 +21,28 @@ public class PlaylistServiceImpl implements PlaylistService {
 	private PlaylistRepo playlistRepo;
 	
 	@Autowired
-	private MongoTemplate mongoTemplate;
+	private CancionRepo cancionRepo;
+	
+//	@Autowired
+//	private CancionService cancionService;
+//	
+//	@Autowired
+//	private MongoTemplate mongoTemplate;
 
+//	@Override
+//	public String save(Playlist playlist) {
+//		playlist.setCanciones(List.of());
+//		playlistRepo.save(playlist);
+//		return playlist.getPlaylistNombre();
+//	}
+	
 	@Override
-	public String save(Playlist playlist) {
-		playlistRepo.save(playlist);
-		return playlist.getPlaylistNombre();
+	public Playlist save(String playlistId,String playlistNombre) {
+		Playlist playlist = new Playlist();
+		playlist.setPlaylistId(playlistId);
+		playlist.setPlaylistNombre(playlistNombre);
+        playlist.setPlCanciones(List.of()); // Inicia vacía	
+        return playlistRepo.save(playlist);
 	}
 
 	@Override
@@ -39,18 +56,27 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	@Override
-	public String addSong(String playlistId, String songId) {
-		Optional<Playlist> playlistOptional1 = playlistRepo.findById(playlistId);
-		//Optional<Cancion> cancionOptional = can
-		return null;
+	public Playlist addSong(String playlistId, String songId) {
+		Optional<Playlist> playlistOptional = playlistRepo.findById(playlistId);
+		Optional<Cancion> cancionOptional = cancionRepo.findById(songId);
+		if (playlistOptional.isPresent() && cancionOptional.isPresent()) {
+            Playlist playlist = playlistOptional.get();
+            if (!playlist.getPlCanciones().contains(songId)) {
+				playlist.getPlCanciones().add(songId);
+			}
+            return playlistRepo.save(playlist);
+        } else {	
+            throw new RuntimeException("Playlist o canción no encontrada");
+        }
 	}
 
 	@Override
-	public List<Cancion> getSongsPL(String plName) {
-		Optional<Playlist> playlistOptional2 = playlistRepo.findById(plName);
-		if (playlistOptional2.isPresent()) {
-			List<Cancion> canciones = playlistOptional2.get().getCanciones();
-			return null;
+	public List<Cancion> getSongsPL(String playlistId) {
+		Optional<Playlist> playlistOptional = playlistRepo.findById(playlistId);
+		if (playlistOptional.isPresent()) {
+			Playlist playlist = playlistOptional.get();
+			List<String> canciones = playlist.getPlCanciones();
+			return cancionRepo.findAllById(canciones);
 		}else {
 			throw new RuntimeException("Playlist no encontrada");
 		}

@@ -13,9 +13,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Document("playlists")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Playlist {
@@ -23,24 +23,7 @@ public class Playlist {
 	@Id
 	private String playlistId;
 	private String playlistNombre;
-	private int countSongs;
-	private String duracion;
-	private List<Cancion> canciones = new ArrayList<>();//O guardar solo las ids de las canciones con private List<String> songsIds;?
-
-//	public Playlist(String nombre) {
-//		this.playlistNombre = nombre;
-//		}
-//
-//	public void agregarCancion(Cancion cancion) {
-//		canciones.add(cancion);
-//	}
-
-//	public void reproducirPlaylist() {
-//		System.out.println("▶ Reproduciendo playlist: " + nombre);
-//		for (Cancion c : canciones) {
-//			c.reproducir();
-//		}
-//	}
-
-    //public List<Cancion> getCanciones() { return canciones; }
+	//private int countSongs;
+	//private String duracion;
+	private List<String> plCanciones = new ArrayList<>();//O guardar solo las ids de las canciones con private List<String> songsIds;?
 }

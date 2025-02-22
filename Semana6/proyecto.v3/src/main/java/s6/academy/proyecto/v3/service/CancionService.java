@@ -10,6 +10,7 @@ public interface CancionService {
 	//Impresion de las canciones y eliminacion de una cancion
 	List<Cancion> getCanciones();
 	List<Cancion> getCancion(String songName);
+	Cancion updateCancion (String songId, Cancion cancionBody);
 	void delete(String songId);
 //	
 	//Imprimir canciones en un rango dado

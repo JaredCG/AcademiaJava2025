@@ -7,6 +7,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import s6.academy.proyecto.v3.bo.Cancion;
+import s6.academy.proyecto.v3.bo.Playlist;
 import s6.academy.proyecto.v3.service.CancionService;
 import s6.academy.proyecto.v3.service.PlaylistService;
 
@@ -19,7 +20,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,8 +89,7 @@ public class FinalProjectController {
                 productInfoList.add(productData);
             }//Intento declarando "duracion" como string
 
-            BulkOperations bulkOps = 
-            		mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Cancion.class);
+            BulkOperations bulkOps = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Cancion.class);
             productInfoList.stream().filter(product -> product != null).forEach(product -> {
                 org.bson.Document dbDoc = new org.bson.Document().append("$set", product);
                 mongoTemplate.getConverter().write(product, dbDoc);
@@ -106,18 +110,57 @@ public class FinalProjectController {
 		return cancionService.getCanciones();
 	}
     
-    @GetMapping
+    @GetMapping("/cancion")
 	public List<Cancion> getCancion(@RequestParam String name){
 		return cancionService.getCancion(name);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void delete (@PathVariable String songId) {
+	@DeleteMapping("/deletesong/{songId}")
+	public void deleteSong (@PathVariable String songId) {
 		cancionService.delete(songId);
 	}
 	
 	@GetMapping("/rangoduracion")
 	public List<Cancion> getRangoDuracion(@RequestParam double min, double max){
 		return cancionService.getRangoDuracion(min,max);
+	}
+	
+	@PatchMapping("/cancion/{songId}")
+    public Cancion updateCancion(@PathVariable String songId, @RequestBody Cancion cancionBody) {
+        return cancionService.updateCancion(songId, cancionBody);
+    }
+	
+	
+	/********************METODOS PARA PLAYLIST*****************/
+	@PostMapping("/crearplaylist")
+	public /*String*/Playlist save(@RequestParam /*Playlist*/String playlistId,@RequestParam String playlistNombre) {
+		
+		return playlistService.save(playlistId, playlistNombre);
+	}
+	
+//	@PostMapping("/crearplaylist")
+//	public String save(@RequestBody Playlist playlist) {
+//		
+//		return playlistService.save(playlist);
+//	}
+	
+	@GetMapping("/playlists")
+	public List<Playlist> getPlaylists(){
+		return playlistService.getPlaylists();
+	}
+	
+	@DeleteMapping("/deleteplaylist/{playlistId}")
+	public void deletePlaylist (@PathVariable String playlistId) {
+		playlistService.delete(playlistId);
+	}
+	
+	@PostMapping("/{playlistId}/agregarcancion")
+    public Playlist addSongToPlaylist(@PathVariable String playlistId, @RequestParam String cancionId) {
+        return playlistService.addSong(playlistId, cancionId);
+    }
+	
+	@GetMapping("/{playlistId}/songslist")
+	public List<Cancion> getSongsFromPlaylist(@PathVariable String playlistId){
+		return playlistService.getSongsPL(playlistId);
 	}
 }

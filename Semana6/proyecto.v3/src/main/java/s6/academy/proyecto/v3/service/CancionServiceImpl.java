@@ -1,6 +1,8 @@
 package s6.academy.proyecto.v3.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -38,5 +40,35 @@ public class CancionServiceImpl implements CancionService {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("duracion").gte(minD).lte(maxD));
 		return mongoTemplate.find(query,Cancion.class);
+	}
+
+	@Override
+	public Cancion updateCancion (String songId, Cancion cancionBody) {
+		
+		Optional<Cancion> cancionOptional = cancionRepo.findById(songId);
+
+        if (cancionOptional.isEmpty()) {
+            throw new RuntimeException("Canción no encontrada");
+        }
+
+        Cancion modifCancion = cancionOptional.get();
+
+        // Verifica que la canción recibida no sea null antes de acceder a sus valores
+        if (cancionBody == null) {
+            throw new RuntimeException("Datos inválidos para actualizar la canción");
+        }
+
+        // Solo actualizar los campos que se enviaron
+        if (cancionBody.getTitulo() != null && !cancionBody.getTitulo().isEmpty()) {
+        	modifCancion.setTitulo(cancionBody.getTitulo());
+        }
+        if (cancionBody.getArtista() != null && !cancionBody.getArtista().isEmpty()) {
+        	modifCancion.setArtista(cancionBody.getArtista());
+        }
+        if (cancionBody.getAlbum() != null) {  // Asegurar que la duración se puede modificar
+        	modifCancion.setDuracion(cancionBody.getAlbum());
+        }
+
+        return cancionRepo.save(modifCancion);
 	}
 }
