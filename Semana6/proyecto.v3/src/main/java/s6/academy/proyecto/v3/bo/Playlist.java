@@ -23,7 +23,5 @@ public class Playlist {
 	@Id
 	private String playlistId;
 	private String playlistNombre;
-	//private int countSongs;
-	//private String duracion;
-	private List<String> plCanciones = new ArrayList<>();//O guardar solo las ids de las canciones con private List<String> songsIds;?
+	private List<String> plCanciones = new ArrayList<>();
 }

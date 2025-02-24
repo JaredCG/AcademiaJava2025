@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import s6.academy.proyecto.v3.bo.Cancion;
@@ -22,12 +19,6 @@ public class PlaylistServiceImpl implements PlaylistService {
 	
 	@Autowired
 	private CancionRepo cancionRepo;
-	
-//	@Autowired
-//	private CancionService cancionService;
-//	
-//	@Autowired
-//	private MongoTemplate mongoTemplate;
 
 //	@Override
 //	public String save(Playlist playlist) {
@@ -41,7 +32,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 		Playlist playlist = new Playlist();
 		playlist.setPlaylistId(playlistId);
 		playlist.setPlaylistNombre(playlistNombre);
-        playlist.setPlCanciones(List.of()); // Inicia vacía	
+        playlist.setPlCanciones(List.of()); //Inicia vacía	
         return playlistRepo.save(playlist);
 	}
 

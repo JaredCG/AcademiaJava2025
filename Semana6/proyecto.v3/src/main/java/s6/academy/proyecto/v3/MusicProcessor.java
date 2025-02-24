@@ -1,8 +1,6 @@
 package s6.academy.proyecto.v3;
 /* ItemProcessor de Spring Batch
- * Componente de Job/Step para procesar y/o transformar los datos 
- * 
- * 
+ * Componente de Job/Step para procesar y/o transformar los datos  
  * */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

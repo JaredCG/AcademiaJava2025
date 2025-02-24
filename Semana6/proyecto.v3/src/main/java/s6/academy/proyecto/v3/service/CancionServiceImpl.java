@@ -13,7 +13,7 @@ import s6.academy.proyecto.v3.repository.CancionRepo;
 
 @Service
 public class CancionServiceImpl implements CancionService {
-	
+	//Implementacion del servicio para la collection Cancion
 	@Autowired
 	private CancionRepo cancionRepo;
 	
@@ -53,20 +53,26 @@ public class CancionServiceImpl implements CancionService {
 
         Cancion modifCancion = cancionOptional.get();
 
-        // Verifica que la canción recibida no sea null antes de acceder a sus valores
-        if (cancionBody == null) {
+        
+        if (cancionBody == null) {//Verifica que la canción recibida no sea null antes de acceder a los valores
             throw new RuntimeException("Datos inválidos para actualizar la canción");
         }
 
-        // Solo actualizar los campos que se enviaron
+        //Solo actualizar los campos que se enviaron
         if (cancionBody.getTitulo() != null && !cancionBody.getTitulo().isEmpty()) {
         	modifCancion.setTitulo(cancionBody.getTitulo());
         }
         if (cancionBody.getArtista() != null && !cancionBody.getArtista().isEmpty()) {
         	modifCancion.setArtista(cancionBody.getArtista());
         }
-        if (cancionBody.getAlbum() != null) { 
-        	modifCancion.setDuracion(cancionBody.getAlbum());
+        if (cancionBody.getAlbum() != null && !cancionBody.getAlbum().isEmpty()) { 
+        	modifCancion.setAlbum(cancionBody.getAlbum());
+        }
+        if (cancionBody.getGenero() != null && !cancionBody.getGenero().isEmpty()) { 
+        	modifCancion.setGenero(cancionBody.getGenero());
+        }
+        if (cancionBody.getDuracion() != null && !cancionBody.getDuracion().isEmpty()) { 
+        	modifCancion.setDuracion(cancionBody.getDuracion());
         }
 
         return cancionRepo.save(modifCancion);

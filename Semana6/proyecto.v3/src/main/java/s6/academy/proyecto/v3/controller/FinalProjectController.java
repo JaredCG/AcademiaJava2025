@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +58,7 @@ public class FinalProjectController {
         }
         return "Mongodb Bulk Update Processed";
     }
-
+    /*Bulk Update de MongoDB lee e inserta la info del CSV para luego subirlo/actualizarlo con el primer GetMapping  */
     private void commitBulkUpdateToMongoDB() {
         try {
         	BufferedReader reader = new BufferedReader(new FileReader(fileInput));
@@ -85,9 +84,8 @@ public class FinalProjectController {
                 productData.setAlbum(productStringArry[3]);
                 productData.setGenero(productStringArry[4]);
                 productData.setDuracion(productStringArry[5]);
-                //productData.setDuracion(Double.parseDouble(productStringArry[5]));
                 productInfoList.add(productData);
-            }//Intento declarando "duracion" como string
+            }
 
             BulkOperations bulkOps = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, Cancion.class);
             productInfoList.stream().filter(product -> product != null).forEach(product -> {
@@ -105,61 +103,61 @@ public class FinalProjectController {
         }
     }
     
-    @GetMapping("/canciones")
+    @GetMapping("/canciones")//Mostrar todas las canciones subidas a la BD
 	public List<Cancion> getCanciones(){
 		return cancionService.getCanciones();
 	}
     
-    @GetMapping("/cancion")
+    @GetMapping("/cancion")//Mostrar la cancion solicitada a través del titulo de la cancion
 	public List<Cancion> getCancion(@RequestParam String name){
 		return cancionService.getCancion(name);
 	}
 	
-	@DeleteMapping("/deletesong/{songId}")
+	@DeleteMapping("/deletesong/{songId}")//Eliminar una cancion usando su ObjectId
 	public void deleteSong (@PathVariable String songId) {
 		cancionService.delete(songId);
 	}
 	
-	@GetMapping("/rangoduracion")
+	@GetMapping("/rangoduracion")//Mostrar canciones dentro de un rango de duracion
 	public List<Cancion> getRangoDuracion(@RequestParam double min, double max){
 		return cancionService.getRangoDuracion(min,max);
 	}
 	
-	@PatchMapping("/cancion/{songId}")
+	@PatchMapping("/cancion/{songId}")//Parchar/modificar los datos de una cancion solicitda a través de su ObjectId
     public Cancion updateCancion(@PathVariable String songId, @RequestBody Cancion cancionBody) {
         return cancionService.updateCancion(songId, cancionBody);
     }
 	
 	
 	/********************METODOS PARA PLAYLIST*****************/
-	@PostMapping("/crearplaylist")
+	@PostMapping("/crearplaylist")//Crear una playlist con su id y nombre
 	public /*String*/Playlist save(@RequestParam /*Playlist*/String playlistId,@RequestParam String playlistNombre) {
 		
 		return playlistService.save(playlistId, playlistNombre);
 	}
 	
-//	@PostMapping("/crearplaylist")
+//	@PostMapping("/crearplaylist")//Otra manera para crear la playlist
 //	public String save(@RequestBody Playlist playlist) {
 //		
 //		return playlistService.save(playlist);
 //	}
 	
-	@GetMapping("/playlists")
+	@GetMapping("/playlists")//Mostrar todas las playlists creadas
 	public List<Playlist> getPlaylists(){
 		return playlistService.getPlaylists();
 	}
 	
-	@DeleteMapping("/deleteplaylist/{playlistId}")
+	@DeleteMapping("/deleteplaylist/{playlistId}")//Eliminar una cancion solicitando su id
 	public void deletePlaylist (@PathVariable String playlistId) {
 		playlistService.delete(playlistId);
 	}
 	
-	@PostMapping("/{playlistId}/agregarcancion")
+	@PostMapping("/{playlistId}/agregarcancion")//Agregar una cancion a una playlist usando sus ids
     public Playlist addSongToPlaylist(@PathVariable String playlistId, @RequestParam String cancionId) {
         return playlistService.addSong(playlistId, cancionId);
     }
 	
-	@GetMapping("/{playlistId}/songslist")
+	@GetMapping("/{playlistId}/songslist")//Mostrar canciones dentro de la playlist solicitada
 	public List<Cancion> getSongsFromPlaylist(@PathVariable String playlistId){
 		return playlistService.getSongsPL(playlistId);
 	}

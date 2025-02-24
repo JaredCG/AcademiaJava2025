@@ -60,8 +60,6 @@ public class FinalProjectBatchConfiguration {
             .build();
     }
 	
-	
-	
 	@Bean
     public Job importUserJob(JobRepository jobRepository, JobExecutionListener listener, Step step1) {
         return new JobBuilder("importUserJob", jobRepository)
@@ -77,8 +75,6 @@ public class FinalProjectBatchConfiguration {
         return new JobExecutionListener() {//En remplazo de JobExecutionListenerSupport que es Deprecated
 		};
     }
-	
-	
 	
 	@SuppressWarnings("unchecked")
 	@Bean

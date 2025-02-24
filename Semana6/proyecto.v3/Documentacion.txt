@@ -1,21 +1,25 @@
 Iniciada la app, cargar el link para subir los datos guardados en songs.csv a mongodb	
 
-	#localhost:8084/musica/mongodbbulkupdate
+	localhost:8084/musica/mongodbbulkupdate
 
 Para mostrar todos los datos (canciones), poner el siguiente link para llamar al GetMapping
 
-	#localhost:8084/musica/canciones
+	localhost:8084/musica/canciones
 
-Ya fue declarado el GET para mostrar la cancion que se busque pero no he podido habilitar Swagger
+Documentacion de OpenAPI
+	http://localhost:8084/v3/api-docs
+
+Link default de Swagger (OpenAPI)
+	http://localhost:8084/swagger-ui/index.html
+
+Carga H2
+	http://localhost:8084/h2-console
 
 
-
-
-MusicProcessor.java es para Spring Batch, no se va a usar
 
 Estoy usando Spring Boot 3.3.8, Spring Boot 3 no soporta Swagger 2, cambiar a OpenAPI 3
 
-#http://localhost:8080/v3/api-docs o en 8084, ya probaré
+
 #springdoc.api-docs.path=/ruta para personalizar la ruta
 #http://localhost:8080/swagger-ui/index.html para ver la documentacion de swagger ui
 #springdoc.swagger-ui.path=/swagger-ui-custom.html para personalizar la ruta
